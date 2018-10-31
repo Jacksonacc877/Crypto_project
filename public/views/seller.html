@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>E-Auction Seller's Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <p style="text-align: center; font-family: sans-serif;color: crimson; font-size: 48px;">E-Auction System</p>
+    <div style="padding-left: 20px">
+        <img src="../images/vases.jpg" class="img-thumbnail" width="500px" height="300px" alt="Collection of Entique Vases">
+        <p style="padding-top: 30px">
+            Item Name : Entique Vases <br>
+            Starting Price : 20,000 INR<br>
+            Bid Size : 1,000 INR</p>
+        <button type="button" id="bid_start" class="btn btn-default" style="margin-top: 10px">Start Auction</button>
+        <button type="button" id="bid_show" class="btn btn-default" style="margin-top: 10px">Show Bids</button>
+    </div><br><br>
+    <ul id="bid_list"></ul>
+    <script>
+        var keys, temp1, temp2, temp3;
+        $(function() {
+            $('#bid_start').click(function(event) {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/pubKeys",
+                    success: function() {
+                        alert('Auction Started');
+                    },
+                    error: function() {
+                        alert('Problem starting auction');
+                    }
+                });
+            });
+            $('#bid_show').click(function(event) {
+                var $bids = $('#bid_list');
+                $.ajax({
+                    type: "GET",
+                    url: "/showBids",
+                    success: function(data) {
+                        var buyers = JSON.parse(data);
+                        console.log(buyers['usr' + 1].name);
+                        var i = 1,
+                            nm, bd;
+                        while (buyers['usr' + i]) {
+                            nm = buyers['usr' + i].name;
+                            bd = buyers['usr' + i].bid;
+                            $bids.append('<li class="list-group-item" style="width:400px">Name : ' + nm + ' Amount : ' + bd + '</li>');
+                            i++;
+                        }
+                    }
+                });
+            });
+        });
+
+    </script>
+</body>
+
+</html>
