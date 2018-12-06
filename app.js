@@ -79,7 +79,7 @@ var users = {
         bid: bid4
     }
 }
-var i = 1;
+/*var i = 1;
 while (users['usr' + i]) {
     db.bids.update({
         name: users['usr' + i].name
@@ -87,7 +87,7 @@ while (users['usr' + i]) {
         bid: users['usr' + i].bid.toString()
     });
     i++;
-}
+}*/
 //console.log('Name : '+users.usr1.name+'\nBid : '+users.usr1.bid.toString());
 var user1 = users;
 user1.usr1.bid = dec_bid1;
@@ -139,11 +139,11 @@ app.post('/bid', function (req, res) {
             name: req.body.name,
             bid: dec_bidn
         };
-        db.bids.update({
+        /*db.bids.update({
             name: users['usr' + n].name
         }, {
             bid: users['usr' + n].bid.toString()
-        });
+        });*/
         console.log(user1);
         //console.log(JSON.stringify(users1));
         //console.log("Bid Placed");
