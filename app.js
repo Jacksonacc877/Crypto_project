@@ -125,7 +125,9 @@ app.post('/bid', function (req, res) {
         let bnn = bigInt(bid_add).mod(publicKey.n);
         while (bnn.lt(0)) bnn = bnn.add(publicKey.n);
         let cn = publicKey.encrypt(bnn);
+        console.log("Name: " + req.body.name);        
         let bidn = publicKey.addition(c, cn);
+        console.log("Bid (encrypted): " + bidn);
         let dec_bidn = privateKey.decrypt(bidn);
         n = n + 1;
         users['usr' + n] = {
@@ -138,7 +140,7 @@ app.post('/bid', function (req, res) {
             name: req.body.name,
             bid: dec_bidn
         };
-        console.log('Name : '+users.'usr' + n.name+'\nBid : '+users.'usr' + n.bid.toString());
+        //console.log('Name : '+users.'usr' + n.name+'\nBid : '+users.'usr' + n.bid.toString());
         /*db.bids.update({
             name: users['usr' + n].name
         }, {
