@@ -11,7 +11,7 @@ var db = mongojs('eauction', ['bids']);
 var index = require('./routes/index');
 var buyer = require('./routes/buyer');
 var seller = require('./routes/seller');
-var tasks = require('./public/js/tasks');
+//var tasks = require('./public/js/tasks');
 
 var app = express();
 
@@ -88,7 +88,6 @@ while (users['usr' + i]) {
     });
     i++;
 }*/
-//console.log('Name : '+users.usr1.name+'\nBid : '+users.usr1.bid.toString());
 var user1 = users;
 user1.usr1.bid = dec_bid1;
 user1.usr2.bid = dec_bid2;
@@ -139,12 +138,13 @@ app.post('/bid', function (req, res) {
             name: req.body.name,
             bid: dec_bidn
         };
+        console.log('Name : '+users.'usr' + n.name+'\nBid : '+users.'usr' + n.bid.toString());
         /*db.bids.update({
             name: users['usr' + n].name
         }, {
             bid: users['usr' + n].bid.toString()
         });*/
-        console.log(user1);
+        //console.log(user1);
         //console.log(JSON.stringify(users1));
         //console.log("Bid Placed");
         res.send("Success");
